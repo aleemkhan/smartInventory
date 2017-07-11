@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<script src="js/angular.js"></script>
+		<script src="js/angular-route.js"></script>
+		<script src="js/angular-resource.js"></script>
+		<script src="js/material.js"></script>
+		<script src="js/angular-animate.js"></script>
+		<script src="js/angular-aria.min.js"></script>
+		<script src="js/angular-material.min.js"></script>
+
+		<link rel="stylesheet" href="css/roboto.css" type="text/css">
+		<link rel="stylesheet" href="css/material.css">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/material-icons.css">
+	</head>
+
+	<body ng-app="smartInventory"  ng-controller="myCtrl" md-theme="altTheme">
+
+		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+
+			<header class="mdl-layout__header">
+				<div class="mdl-layout__header-row">
+					<!-- Title -->
+					<span class="mdl-layout-title">Smart Inventory</span>
+					<!-- Add spacer, to align navigation to the right -->
+					<div class="mdl-layout-spacer"></div>
+					<!-- Navigation -->
+					<nav class="mdl-navigation">
+						<a class="mdl-navigation__link" href="#!help">Help</a>					
+					</nav>
+				</div>
+			</header>
+
+			<div class="mdl-layout__drawer" style="">
+				<header class="mdl-layout__header">
+					<div class="mdl-layout__header-row">
+						<!-- Title -->
+						<span class="mdl-layout-title">Menu</span>
+					</div>
+				</header>
+				<ul class="demo-list-icon mdl-list">
+					<li class="mdl-list__item pointer" ng-click="setPath('/')">
+						<span class="mdl-list__item-primary-content">
+							<i class="material-icons mdl-list__item-icon">home</i>
+							Home
+						</span>
+					</li>
+					<li class="mdl-list__item pointer" ng-click="sortType  = 'category'; setPath('/categories')">
+						<span class="mdl-list__item-primary-content">
+							<i class="material-icons mdl-list__item-icon">list</i>
+							Categories
+						</span>
+					</li>
+					<li class="mdl-list__item pointer" ng-click="sortType  = 'name'; editProductFlag = false; setPath('/products')">
+						<span class="mdl-list__item-primary-content">
+							<i class="material-icons mdl-list__item-icon">turned_in</i>
+							Products
+						</span>
+					</li>
+					<li class="mdl-list__item pointer" ng-click="sortType  = 'date'; setPath('/orders')">
+						<span class="mdl-list__item-primary-content">
+							<i class="material-icons mdl-list__item-icon">history</i>
+							Order History
+						</span>
+					</li>
+					<hr>
+					<li class="mdl-list__item pointer" ng-click="setPath('/add_product')">
+						<span class="mdl-list__item-primary-content">
+							<i class="material-icons mdl-list__item-icon">create</i>
+							Add Products
+						</span>
+					</li>
+				</ul>
+			</div>
+
+			<main id="content" class="mdl-layout__content" style="background: #e4e4e4;" ng-view>
+
+			</main>
+			<div id="toast" class="mdl-js-snackbar mdl-snackbar">
+				<div class="mdl-snackbar__text"></div>
+				<button class="mdl-snackbar__action" type="button"></button>
+			</div>
+
+		</div>
+		<script src="js/misc.js"></script>
+		<script src="js/myInventory.js"></script>
+	</body>
+</html>

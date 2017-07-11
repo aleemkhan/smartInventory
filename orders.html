@@ -1,0 +1,47 @@
+<div>
+	<header class="mdl-layout__header" style="background-color: white;">
+		<div class="mdl-layout__header-row">
+			<form action="#">
+				<div class="">
+					<label class="" for="search" style="color:black;">Search Orders</label>
+					<input class="mdl-textfield__input" type="text" id="searchOrders" style="color:black;"  ng-model="searchOrders">
+				</div>
+			</form>
+		</div>
+	</header>
+
+	<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width:100%;">
+		<thead>
+			<tr>
+				<th class="pointer" ng-click="sortType = 'name';"> Customer </th>
+				<th class="pointer" ng-click="sortType = 'category';"> Contact </th>
+				<th> Paid Amount </th>
+				<th> Items Bought </th>
+				<th> Date </th>
+				<th> Time </th>
+				<th> Back to cart </th>
+				<th> Delete </th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="order in orders | orderBy:sortType | filter:searchOrders">
+				<td> {{order.name}} </td>
+				<td> {{order.contact}} </td>
+				<td> {{order.total}} </td>
+				<td> {{order.order.length}} </td>
+				<td> {{order.date}} </td>
+				<td> {{order.time}} </td>
+				<td> 
+					<button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary" ng-click="sendToCart(order, $index)">
+						<i class="material-icons">add_shopping_cart</i>
+					</button>
+				</td>
+				<td>
+					<button class="mdl-button mdl-js-button mdl-button--icon mdl-button--accent" ng-click="removeOrder($index)">
+						<i class="material-icons">clear</i>
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

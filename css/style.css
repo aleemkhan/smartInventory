@@ -1,0 +1,25 @@
+.demo-layout-transparent {
+  background: url('https://getmdl.io/assets/demos/transparent.jpg') top center no-repeat;
+}
+.demo-layout-transparent .mdl-layout__header,
+.demo-layout-transparent .mdl-layout__drawer-button {
+  /* This background is dark, so we set text to white. Use 87% black instead if
+     your background is light. */
+  color: white;
+}
+
+.mdl-list__item:hover{
+	background-color: #e6e6e6;
+}
+
+.pointer{
+	cursor : pointer;
+}
+
+.mdl-data-table td, .mdl-data-table th {
+	text-align: left !important;
+}
+
+#searchCategory{
+	color: black !important;
+}

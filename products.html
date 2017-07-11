@@ -1,0 +1,96 @@
+<div ng-show="!editProductFlag">
+	<header class="mdl-layout__header" style="background-color: white;">
+		<div class="mdl-layout__header-row">
+			<form action="#">
+				<div class="">
+					<label class="" for="search" style="color:black;">Search Products</label>
+					<input class="mdl-textfield__input" type="text" id="searchProduct" style="color:black;"  ng-model="searchProduct">
+				</div>
+			</form>
+			<button style="right: 20px; text-align: right; position: absolute;" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" ng-click="setPath('/add_product')">
+			 	Add Product
+			</button>
+		</div>
+	</header>
+
+	<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width:100%;">
+		<thead>
+			<tr>
+				<th class="pointer" ng-click="sortType = 'name';"> Products </th>
+				<th class="pointer" ng-click="sortType = 'category';"> Category </th>
+				<th> Quantity </th>
+				<th> Unit price </th>
+				<th> Edit </th>
+				<th> Delete </th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="product in products | orderBy:sortType | filter:searchProduct">
+				<td> {{product.name}} </td>
+				<td> {{product.category}} </td>
+				<td> {{product.quantity}} </td>
+				<td> {{product.price}} </td>
+				<td> 
+					<button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" ng-click="editProduct($index)">
+						<i class="material-icons">create</i>
+					</button>
+				</td>
+				<td>
+					<button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" ng-click="removeProduct($index)">
+						<i class="material-icons">clear</i>
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<div class="mdl-grid" ng-show="editProductFlag" style="background-color: white;">
+	<div class="mdl-cell mdl-cell--3-col"></div>
+	<div class="mdl-cell mdl-cell--6-col">
+		<div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width:100%; min-height:auto;">
+			<div class="mdl-card__title">
+				<h2 class="mdl-card__title-text">Edit Product</h2>
+			</div>
+			<div class="mdl-card__supporting-text">
+				<form name="saveProductForm" id="categoryForm" action="#">
+					<div class="">
+						<label>Product Name</label>
+						<input class="mdl-textfield__input" type="text" name="name" id="name" ng-model="editableProduct.name" required>
+					</div>
+					<br>
+					<div class="">
+						<label>SKU (Unique Identifier or Stock Keeping Unit)</label>
+						<input class="mdl-textfield__input" type="text" name="sku" id="sku"  ng-model="editableProduct.sku"  required>
+					</div>
+					<br>
+					<div class="">
+						<label>Price</label>
+						<input class="mdl-textfield__input" type="number" name="price" id="price" ng-model="editableProduct.price" required>
+					</div>
+					<br>
+					<div class="">
+						<label>Quantity</label>
+						<input class="mdl-textfield__input" type="number" name="quantity" id="quantity" ng-model="editableProduct.quantity" required>
+					</div>
+					<br>
+					<div class="">
+						<label>Product Category</label>
+						<select class="mdl-textfield__input" type="number" name="category" id="category" ng-model="editableProduct.category" required>
+							<option ng-repeat="cat in categories" value="{{cat}}">{{cat}}</option>
+						</select>
+					</div>
+				</form>
+			</div>
+			<div class="mdl-card__actions mdl-card--border">
+				<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" ng-click="cancel()">
+					Cancel
+				</button>
+				<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary" ng-show="saveProductForm.name.$valid && saveProductForm.sku.$valid && saveProductForm.price.$valid && saveProductForm.quantity.$valid && saveProductForm.category.$valid" ng-click="saveProduct();">
+					Save Product
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="mdl-cell mdl-cell--3-col"></div>
+</div>

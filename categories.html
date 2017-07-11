@@ -1,0 +1,55 @@
+<div class="mdl-grid">
+	<div class="mdl-cell mdl-cell--7-col" style="background-color: white;">
+		<header class="mdl-layout__header" style="background-color: white;">
+			<div class="mdl-layout__header-row">
+				<form action="#">
+					<div class="mdl-textfield">
+						<label for="searchCategory" style="color:black;">Search Category</label>
+						<input class="mdl-textfield__input" type="text" name="searchCategory" id="searchCategory" ng-model="searchCategory">
+					</div>
+				</form>
+			</div>
+		</header>
+
+		<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width:100%;">
+			<thead>
+				<tr>
+					<th class="pointer" ng-click="sortType = 'category'; sortReverse = !sortReverse;"> 
+						Category 
+					</th>
+					<th> Delete </th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="category in categories | orderBy:sortType | filter:searchCategory">
+					<td> {{category}} </td>
+					<td>
+						<button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" ng-click="removeCategory($index)">
+							<i class="material-icons">clear</i>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="mdl-cell mdl-cell--5-col">
+		<div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width:100%; min-height:auto;">
+			<div class="mdl-card__title">
+				<h2 class="mdl-card__title-text">Create Category</h2>
+			</div>
+			<div class="mdl-card__supporting-text">
+				<form name="categoryForm" id="categoryForm" action="#">
+					<div class="">
+						<label for="category" style="color:black;">Category Title</label>
+						<input class="mdl-textfield__input" type="text" name="category" id="category" ng-model="category" required>
+					</div>
+				</form>
+			</div>
+			<div class="mdl-card__actions mdl-card--border">
+				<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary" ng-show="categoryForm.category.$valid" ng-click="addCategory(); categoryForm.category=null; categoryForm={};">
+					Create Category
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
